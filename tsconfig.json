@@ -1,0 +1,39 @@
+{
+  "compilerOptions": {
+    "incremental": true,
+    "target": "es2021",
+    "module": "commonjs",
+    "baseUrl": "./",
+    "declaration": true,
+    "downlevelIteration": true,
+    // "declarationMap": true,
+    "sourceMap": true,
+    // "inlineSourceMap": true,
+    "outDir": "./dist",
+    "importsNotUsedAsValues": "remove",
+    // "inlineSources": true,
+    "newLine": "lf",
+    "noEmitOnError": true,
+    "declarationDir": "./dist",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "skipDefaultLibCheck": true,
+    "skipLibCheck": true,
+    "lib": [
+      "es2021"
+    ]
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
+}

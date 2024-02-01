@@ -1,0 +1,67 @@
+import type { NoValueError } from '../core/no-value-error'
+import type { PonadPromise } from '../core/ponad-promise'
+import type { Option } from './option'
+import type { OptionMatcher } from './option-matcher'
+
+export class OptionPromise<T>
+  extends Promise<Option<T>>
+  implements PonadPromise<T, void>
+{
+  readonly [Symbol.toStringTag]: string = 'OptionPromise'
+
+  flatMap<U>(func: (value: T) => Option<U>): OptionPromise<U>
+
+  flatten(): FlatOptionPromise<T>
+
+  async fold<U>(ifSome: (value: T) => U, ifNone: () => U): Promise<U> {
+    return this.then((option) => option.fold(ifSome, ifNone))
+  }
+
+  map<U>(transform: (value: T) => U): OptionPromise<U>
+
+  async match<U>(matcher: OptionMatcher<T, U>): Promise<U>
+
+  or<U>(func: () => Option<U>): OptionPromise<T | U>
+
+  async orElse<D>(defaultValue: D): Promise<T | D> {
+    return this.then((option) => option.orElse(defaultValue))
+  }
+
+  async orMap<U>(ifNone: () => U): Promise<T | U> {
+    return this.then((option) => option.orMap(ifNone))
+  }
+
+  async orNull(): Promise<T | null> {
+    return this.orElse(null)
+  }
+  async orReject(func?: () => Error): Promise<T> {
+    return this.then((option) => option.orThrow(func))
+  }
+  async orUndefined(): Promise<T | undefined> {
+    return this.orElse(void 0)
+  }
+  // eslint-disable-next-line @typescript-eslint/promise-function-async
+  tap(func: (value: T) => void): OptionPromise<T> {
+    return this.thenOnOption((option) => option.tap(func))
+  }
+  tapNone(func: () => void): OptionPromise<T> {
+    
+  }
+  // eslint-disable-next-line @typescript-eslint/promise-function-async
+  toOption(): OptionPromise<T> {
+    return this
+  }
+  toResult(): ResultPromise<T, NoValueError> {
+    // TODO
+    return ResultPromise
+  }
+
+  // eslint-disable-next-line @typescript-eslint/promise-function-async
+  private thenOnOption<U>(
+    onfulfilled?: (value: Option<T>) => Option<U>
+  ): OptionPromise<U> {
+    return new OptionPromise((resolve) => {
+      resolve(this.then(onfulfilled))
+    })
+  }
+}
