@@ -1,0 +1,49 @@
+{
+  "name": "@axaptional/monado",
+  "version": "0.1.0",
+  "description": "A lightweight TypeScript library for Options and Results",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/**/*",
+    "LICENSE",
+    "README.md",
+    "package.json"
+  ],
+  "directories": {
+    "doc": "docs",
+    "lib": "dist"
+  },
+  "scripts": {
+    "test": "npm test",
+    "prepublish": "npm run build",
+    "build": "tsc",
+    "format": "prettier --write \"{src,tests}/**/*.ts\"",
+    "lint": "eslint \"{src,tests}/**/*.ts\"",
+    "lint:fix": "eslint \"{src,tests}/**/*.ts\" --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/axaptional/monado.git"
+  },
+  "author": {
+    "name": "André Mategka",
+    "email": "12amdeveloper@gmail.com"
+  },
+  "license": "Unlicense",
+  "bugs": {
+    "url": "https://github.com/axaptional/monado/issues"
+  },
+  "homepage": "https://github.com/axaptional/monado#readme",
+  "devDependencies": {
+    "@types/node": "^20.4.4",
+    "@typescript-eslint/eslint-plugin": "^6.2.0",
+    "@typescript-eslint/parser": "^6.2.0",
+    "eslint": "^8.48.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-perfectionist": "^1.5.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "prettier": "^3.0.0",
+    "typescript": "^5.2.2"
+  }
+}
